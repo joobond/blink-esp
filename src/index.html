@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LED com Arduino</title>
+</head>
+<body>
+    <a class="buttons ligar">Ligar</a>
+    <a class="buttons desligar">Desligar</a>
+
+    <script>
+        var led_controle = function(status) {
+	        var xmlhttp = new XMLHttpRequest();
+	        var set_status = "http://192.168.0.106/?function=" + status;
+	        xmlhttp.open("GET", set_status);
+	        xmlhttp.send();
+	    }
+        
+           // Acessa os botões e passando as nossas diretivas de ligar ou desligar o led 
+	    var led = function() {
+	    	var ligar = document.querySelector(".ligar");
+	    	    ligar.onclick = function() {
+	    	    	led_controle("led5_on");
+	    	    }
+
+    	         var desligar = document.querySelector(".desligar");
+    	            desligar.onclick = function() {
+    	    	       led_controle("led5_off");
+    	            }
+	    }
+
+	    window.onload = function() {
+	    	// Chama a função led
+	    	led();
+	    }
+    </script>
+</body>
+</html>
